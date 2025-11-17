@@ -53,30 +53,6 @@ return {
             },
           },
         },
-        tailwindcss = {
-          mason = false,
-          cmd = { "tailwindcss-language-server", "--stdio" },
-          root_dir = function(fname)
-            return require("lspconfig.util").root_pattern(
-              "tailwind.config.js",
-              "tailwind.config.cjs",
-              "tailwind.config.ts",
-              "postcss.config.js",
-              "package.json",
-              ".git"
-            )(fname)
-          end,
-          settings = {
-            tailwindCSS = {
-              experimental = {
-                classRegex = {
-                  { "clsx\\(([^)]*)\\)", "'([^']*)'" },
-                  { "cn\\(([^)]*)\\)", "'([^']*)'" },
-                },
-              },
-            },
-          },
-        },
       },
       setup = {
         tsserver = function(_, opts)
@@ -87,3 +63,4 @@ return {
     },
   },
 }
+
