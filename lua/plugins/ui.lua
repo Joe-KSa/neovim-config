@@ -1,28 +1,39 @@
-local mode = {
-  "mode",
-  fmt = function(s)
-    local mode_map = {
-      ["NORMAL"] = "N",
-      ["O-PENDING"] = "N?",
-      ["INSERT"] = "I",
-      ["VISUAL"] = "V",
-      ["V-BLOCK"] = "VB",
-      ["V-LINE"] = "VL",
-      ["V-REPLACE"] = "VR",
-      ["REPLACE"] = "R",
-      ["COMMAND"] = "!",
-      ["SHELL"] = "SH",
-      ["TERMINAL"] = "T",
-      ["EX"] = "X",
-      ["S-BLOCK"] = "SB",
-      ["S-LINE"] = "SL",
-      ["SELECT"] = "S",
-      ["CONFIRM"] = "Y?",
-      ["MORE"] = "M",
-    }
-    return mode_map[s] or s
-  end,
+local mode_map = {
+  ["NORMAL"] = "N",
+  ["O-PENDING"] = "N?",
+  ["INSERT"] = "I",
+  ["VISUAL"] = "V",
+  ["V-BLOCK"] = "VB",
+  ["V-LINE"] = "VL",
+  ["V-REPLACE"] = "VR",
+  ["REPLACE"] = "R",
+  ["COMMAND"] = "!",
+  ["SHELL"] = "SH",
+  ["TERMINAL"] = "T",
+  ["EX"] = "X",
+  ["S-BLOCK"] = "SB",
+  ["S-LINE"] = "SL",
+  ["SELECT"] = "S",
+  ["CONFIRM"] = "Y?",
+  ["MORE"] = "M",
 }
+
+local mode = function()
+  local current_mode = vim.fn.mode(true) -- obtiene el modo actual
+  -- vim.fn.mode() devuelve algo como 'n', 'i', 'v', etc., lo convertimos a nombre largo
+  local mode_name = {
+    n = "NORMAL",
+    i = "INSERT",
+    v = "VISUAL",
+    V = "V-LINE",
+    ["\22"] = "V-BLOCK",
+    c = "COMMAND",
+    R = "REPLACE",
+    t = "TERMINAL",
+  }
+  local name = mode_name[current_mode] or current_mode
+  return mode_map[name] or name
+end
 
 -- This file contains the configuration for various UI-related plugins in Neovim.
 return {
@@ -82,7 +93,7 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy", -- Load this plugin on the 'VeryLazy' event
-    requires = { "nvim-tree/nvim-web-devicons", opt = true }, -- Optional dependency for icons
+    -- requires = { "nvim-tree/nvim-web-devicons", opt = true }, -- Optional dependency for icons
     opts = {
       options = {
         theme = "gentleman-kanagawa-blur", -- Set the theme for lualine
@@ -91,8 +102,8 @@ return {
       sections = {
         lualine_a = {
           {
-            "mode", -- Display the current mode
-            icon = "󱗞", -- Set the icon for the mode
+            mode, -- Display the current mode
+            icon = "♫", -- Set the icon for the mode
           },
         },
       },

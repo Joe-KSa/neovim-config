@@ -1,28 +1,17 @@
 return {
   {
     "neovim/nvim-lspconfig",
-    dependencies = {
-      "jose-elias-alvarez/typescript.nvim",
-      init = function()
-        require("lazyvim.util").lsp.on_attach(function(_, buffer)
-          vim.keymap.set("n", "<leader>co", "TypescriptOrganizeImports", { buffer = buffer, desc = "Organize Imports" })
-          vim.keymap.set("n", "<leader>cR", "TypescriptRenameFile", { buffer = buffer, desc = "Rename File" })
-        end)
-      end,
-    },
     event = "VeryLazy",
     opts = {
       inlay_hints = { enabled = false },
       servers = {
-
-        -- Usa tu instalación global de TypeScript
         tsserver = {
           settings = {
             typescript = {
               inlayHints = {
-                includeInlayParameterNameHints = "all", -- muestra nombres en parámetros
-                includeInlayVariableTypeHints = true, -- muestra tipo de variables
-                includeInlayFunctionLikeReturnTypeHints = true, -- muestra tipo retorno
+                includeInlayParameterNameHints = "all",
+                includeInlayVariableTypeHints = true,
+                includeInlayFunctionLikeReturnTypeHints = true,
                 includeInlayPropertyDeclarationTypeHints = true,
               },
             },
@@ -33,8 +22,6 @@ return {
             },
           },
         },
-        -- Usa tu instalación global de Angular
-        --
         angularls = {
           mason = false,
           cmd = { "ngserver", "--stdio", "--tsProbeLocations", "", "--ngProbeLocations", "" },
@@ -42,7 +29,6 @@ return {
             return require("lspconfig.util").root_pattern("angular.json", "project.json")(fname)
           end,
         },
-        -- Usa tu instalación global de Nix
         nil_ls = {
           mason = false,
           cmd = { "nil" },
@@ -54,13 +40,6 @@ return {
           },
         },
       },
-      setup = {
-        tsserver = function(_, opts)
-          require("typescript").setup({ server = opts })
-          return true
-        end,
-      },
     },
   },
 }
-

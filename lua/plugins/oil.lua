@@ -134,9 +134,9 @@ return {
     },
   },
 
-  dependencies = {
-    "nvim-tree/nvim-web-devicons",
-  },
+  -- dependencies = {
+  --   "nvim-tree/nvim-web-devicons",
+  -- },
 
   config = function(_, opts)
     require("oil").setup(opts)
