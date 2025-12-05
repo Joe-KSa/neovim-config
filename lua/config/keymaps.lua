@@ -136,3 +136,7 @@ function SaveFile()
     vim.notify("Error: " .. err, vim.log.levels.ERROR) -- Show the error message if it fails
   end
 end
+
+-- Custom keymaps
+vim.keymap.set("n", "<leader>ft", "<nop>", { silent = true })
+vim.keymap.set("n", "<leader>fT", "<nop>", { silent = true })

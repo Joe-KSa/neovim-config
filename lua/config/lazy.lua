@@ -9,7 +9,7 @@ if vim.fn.executable("node") == 1 then
 end
 
 -- Spell-checking
-vim.opt.spell = true -- activa spell checker
+-- vim.opt.spell = true -- activa spell checker
 vim.opt.spelllang = { "en" }
 
 -- Define the path to the lazy.nvim plugin

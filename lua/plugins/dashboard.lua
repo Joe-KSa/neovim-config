@@ -1,63 +1,6 @@
 return {
   "folke/snacks.nvim",
   lazy = false,
-  -- aplicamos el hl después del setup
-  config = function(_, opts)
-    require("snacks").setup(opts)
-
-    -- función para generar un color aleatorio en formato hexadecimal
-    local function random_color()
-      local r = math.random(0, 255)
-      local g = math.random(0, 255)
-      local b = math.random(0, 255)
-      return string.format("#%02x%02x%02x", r, g, b)
-    end
-
-    -- semilla basada en el tiempo actual
-    math.randomseed(os.time())
-
-    -- color aleatorio
-    local color_header = random_color()
-
-    -- definir el hl principal con la variable
-    vim.api.nvim_set_hl(0, "NeovimDashboardLogo1", { fg = color_header, bold = true })
-
-    local likely = {
-      "SnacksHeader",
-      "SnacksLogo",
-      "SnacksDashboardHeader",
-      "DashboardHeader",
-      "DashboardLogo",
-      "DashboardAscii",
-      "AlphaHeader",
-      "Title",
-      "Normal",
-    }
-
-    local function force_link_groups()
-      for _, g in ipairs(likely) do
-        pcall(vim.cmd, ("hi link %s NeovimDashboardLogo1"):format(g))
-        pcall(vim.cmd, ("hi %s guifg=%s gui=bold ctermfg=13 cterm=bold"):format(g, color_header))
-      end
-    end
-
-    force_link_groups()
-    vim.defer_fn(function()
-      vim.api.nvim_set_hl(0, "NeovimDashboardLogo1", { fg = color_header, bold = true })
-      force_link_groups()
-    end, 100)
-
-    vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter", "UIEnter", "BufWinEnter", "BufRead" }, {
-      callback = function()
-        vim.defer_fn(function()
-          vim.api.nvim_set_hl(0, "NeovimDashboardLogo1", { fg = color_header, bold = true })
-          vim.cmd(("hi NeovimDashboardLogo1 guifg=%s gui=bold ctermfg=13 cterm=bold"):format(color_header))
-          force_link_groups()
-        end, 80)
-      end,
-    })
-  end,
-
   opts = {
     notifier = {},
     image = {},
