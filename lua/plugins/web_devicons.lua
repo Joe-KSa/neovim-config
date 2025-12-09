@@ -6,6 +6,8 @@ return {
       ["test.tsx"] = { glyph = "󰂖", hl = "MiniIconsBlue" },
       ["test.ts"] = { glyph = "󰂖", hl = "MiniIconsBlue" },
       ["otf"] = { glyph = "", hl = "MiniIconsOrange" },
+      ["ng.ts"] = { glyph = "󰚲", hl = "MiniIconsRed" },
+      ["spec.ts"] = { glyph = "󰙨", hl = "MiniIconsRed" },
     },
   },
   init = function()
