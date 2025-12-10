@@ -6,7 +6,6 @@ return {
   config = function()
     local Layout = require("nui.layout")
     local Popup = require("nui.popup")
-
     local TSLayout = require("telescope.pickers.layout")
 
     local function make_popup(options)

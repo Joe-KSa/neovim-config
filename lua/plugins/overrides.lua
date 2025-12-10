@@ -10,15 +10,4 @@ return {
     -- Options to be merged with the parent specification
     opts = { use_diagnostic_signs = true }, -- Use diagnostic signs for trouble.nvim
   },
-
-  -- Add symbols-outline.nvim plugin
-  {
-    -- Plugin: symbols-outline.nvim
-    -- URL: https://github.com/simrat39/symbols-outline.nvim
-    -- Description: A tree like view for symbols in Neovim using the Language Server Protocol.
-    "simrat39/symbols-outline.nvim",
-    cmd = "SymbolsOutline", -- Command to open the symbols outline
-    keys = { { "<leader>cs", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" } }, -- Keybinding to open the symbols outline
-    config = true, -- Use default configuration
-  },
 }
