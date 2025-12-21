@@ -30,13 +30,13 @@ return {
             temperature = 0.1,
             max_tokens = 4096,
           },
-          model = "claude-3.5-sonnet", -- Tu modelo preferido
+          model = "gpt-4o", -- Tu modelo preferido
         },
       },
       auto_suggestions_provider = "copilot", -- Since auto-suggestions are a high-frequency operation and therefore expensive, it is recommended to specify an inexpensive provider or even a free provider: copilot
       behaviour = {
         auto_suggestions = false, -- Experimental stage
-        auto_set_highlight_group = true,
+        auto_set_highlight_group = false,
         auto_set_keymaps = true,
         auto_apply_diff_after_generation = false,
         support_paste_from_clipboard = false,
@@ -151,5 +151,27 @@ return {
         ft = { "markdown", "Avante" },
       },
     },
+    config = function(_, opts)
+      require("avante").setup(opts)
+
+      local function set_avante_colors()
+        local highlights = {
+          { group = "AvanteTitle", opts = { fg = "#1e222a", bg = "#98c379" } },
+          { group = "AvanteSidebarWinSeparator", opts = { fg = "#5c6170" } },
+          { group = "AvanteInlineHint", opts = { fg = "#8394a3", italic = true, force = true } },
+        }
+
+        for _, hl in ipairs(highlights) do
+          vim.api.nvim_set_hl(0, hl.group, hl.opts)
+        end
+      end
+
+      set_avante_colors()
+
+      vim.api.nvim_create_autocmd("ColorScheme", {
+        pattern = "*",
+        callback = set_avante_colors,
+      })
+    end,
   },
 }
